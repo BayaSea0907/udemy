@@ -81,20 +81,108 @@ for day, drink in zip(days, drinks)
 -------------------------------------------------
 ◇ 関数定義
 
+# 定義 defを使う 「():」に注意
+def some_method():
+	return 'hello' # return 必須
+		    # end 不要
+# 呼び出し 「;」不要
+result = some_method()
+#=> 'hello'
+
+# 引数有定義
+def some_method1(a, b):
+def some_method2(a: int, b: int):
+def some_method3(a=10, b=100):
+
+# 引数有呼び出し
+result = some_method1(10, 100)	
+result = some_method2(b=100, a=10)
+result = some_method3()
+
+	
 -------------------------------------------------
 ◇ 関数内関数
+
+def some_method():
+	def hoge():
+		return 'a'
+	return hoge()
+
+result = some_method()
+#=> 'a'
 
 -------------------------------------------------
 ◇ クロージャー
 
+def outher():
+	def inner():
+		return "hello"
+	return innner	# innnerの関数ポインタを返す。
+	
+f = outher
+f()
+#=> 'hello'
+
 -------------------------------------------------
 ◇ デコレーター
+※ デバッグに便利
+
+# 定義
+def print_info(func):
+	def wrapper(*args, **kwargs)
+		print('func:', func.__name__)
+		print('args:', args)
+		print('kwargs:', kwargs)
+		
+		result = func(*args, **kwargs)
+		print('result:', result)
+		return result
+	return wrapper
+
+# 「@」はデコレーターを使います宣言。先に@print_infoが呼び出される。
+#  いろんなメソッドに、「@print_info」を付ける事で、デバッグが楽になる！
+@print_info
+def add_num(a,b):
+	return a+b
+	
+add_num(5, 10)
+#=> func: wrapper
+#=> args: (5, 10)
+#=> result 15
+#=> 15
 
 -------------------------------------------------
 ◇ ラムダ
 
+list = ['One', 'two', 'Three']  # twoだけ小文字
+
+def change_words(words, func):
+	for word in words:
+		print(func(word))
+		
+# lamdaを使って、関数定義を短縮。内部で実行したい関数を渡している。
+change_words(list, lambda word: word.capitalize())
+#=> 'One', 'Two', 'Three'
+change_words(list, lambda word: word.lower())
+#=> 'one', 'two', 'three'
+
 -------------------------------------------------
-◇ ジェネレーター (yield
+◇ ジェネレーター (yield)
+※ ループの任意の場所で抜けられる。
+
+for i in l
+	print(i)
+
+def greeting():
+	yield print('hello')
+	yield print('world')
+	yield print('!!')
+
+func = greeting()
+next(func) #=> 'hello'
+next(func) #=> 'world'
+next(func) #=> '!!'
+next(func) #=> yieldが無いのでエラーになります。
 
 -------------------------------------------------
 ◇ 名前空間
