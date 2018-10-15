@@ -219,3 +219,26 @@ except ErrorClass as error:   # as(として)
 except Exception as error:
 	# エラーリスト https://docs.python.jp/3/library/exceptions.html
 	print('大体のエラーをキャッチします。でもエラーは明確にした方がよい。')
+	
+-------------------------------------------------
+◇ 独自例外
+
+# IndexErrorとして例外を強制的に発生させる
+raise IndexError('test error') 
+
+# 例外クラスを作る
+class UppercaseError(Exception): # Exceptionを受けたときに、UppercaseErrorを発生させる。
+	pass
+
+def check()
+	temp = ['takeshi', 'BAYASEA']
+	if temp.isUpper():
+		raise UppercaseError(temp)
+	
+try:
+	check()
+	#=> UppercaseError: BAYASEA
+except UppercaseError as error:
+	print(error)
+	#=> UppercaseError: BAYASEA
+	pass
