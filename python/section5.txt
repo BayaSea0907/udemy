@@ -222,6 +222,7 @@ except Exception as error:
 	
 -------------------------------------------------
 ◇ 独自例外
+※ version管理の際に、importエラー時に別のファイルをimportすると言った使い道がある。
 
 # IndexErrorとして例外を強制的に発生させる
 raise IndexError('test error') 
