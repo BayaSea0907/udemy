@@ -187,5 +187,35 @@ next(func) #=> yieldが無いのでエラーになります。
 -------------------------------------------------
 ◇ 名前空間
 
+animal = 'cat'
+
+def func():
+	print(animal)  # 自動変数宣言前に呼び出すと、エラーになる。
+	animal = 'dog'
+	print(animal)
+	# print(locals()) # ローカル変数の配列が返ってくる。
+f()
+#=> 'dog'
+
+# funcの中で自動変数「animal」が出来たが、
+# その後消えた。
+print(animal)
+#=> 'cat'
+
 -------------------------------------------------
 ◇ 例外処理
+※ 「try: ～ except:」を使う 
+
+list = [1,2,3]
+i = 5
+
+# 例外を発生させる処理
+try:
+	list[i]	
+	
+# 例外処理
+except ErrorClass as error:   # as(として)
+	print('error message: ', error)
+except Exception as error:
+	# エラーリスト https://docs.python.jp/3/library/exceptions.html
+	print('大体のエラーをキャッチします。でもエラーは明確にした方がよい。')
