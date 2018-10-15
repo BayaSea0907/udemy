@@ -2,6 +2,39 @@
 
 -------------------------------------------------
 ◇ Import
-◇ 絶対パスと相対パスのImport
+※ 「.」で１階層上へ。
+※ 基本は絶対パス(root)から参照する方がよい。
+
+# インポート
+import dirName.file_name
+from direName import file_name
+
+# インポートファイルの呼び出し
+file_name.method()
+
+-------------------------------------------------
 ◇ 組み込み関数
-◇ 標準ライブラリ
+※ print()とか、sorted(n)とか。
+※ https://docs.python.jp/3/library/functions.html
+
+ranking = {'A': 100, 'B': 50, 'C': 75}
+
+sorted(n)   # 昇順で並び替え
+#=> A, B, C
+
+sorted(n, key=ranking.get) # ranking.get('A')でvalueが求められるのと同様
+#=> B, C, A # 昇順
+
+soted(n, key=ranking.get, reverse=True)
+#=> A, C, B # 降順
+
+-------------------------------------------------
+◇ PyPI
+※ サードパーティのパッケージ。(フリーで共有されたパッケージ)
+
+# インストール方法
+
+1. pycharmのパッケージ追加画面から追加だ！！
+   ubuntsを使ってるからそんな機能はないぜ！！！！！！！
+   
+   ※ 「apt-get」や、「wget」を使ってインストールする
