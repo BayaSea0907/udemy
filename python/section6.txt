@@ -38,3 +38,22 @@ soted(n, key=ranking.get, reverse=True)
    ubuntsを使ってるからそんな機能はないぜ！！！！！！！
    
    ※ 「apt-get」や、「wget」を使ってインストールする
+
+-------------------------------------------------
+◇ __name__とか...
+
+-- config.py --
+def hoge():
+   print('config: ', __name__)
+
+-- test.py --
+import dir.config
+
+# 実行する場所によって違うので注意
+print(__name__)  #=> __main__
+config.hoge()    #=> config: config
+
+# テストコードを実装する際に使える
+if __name__
+   result = hoge()
+   print(result)
