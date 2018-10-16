@@ -2,4 +2,196 @@
 
 
 -------------------------------------------------
-◇ 
+◇ クラスの定義
+
+class Person(object):   # (object)は要らないが、基底クラスで使う場合がある。
+  # def say_something(self):
+      print('hello')
+
+person = Person()
+person.say_something()
+#=> 'hello'
+
+
+-------------------------------------------------
+◇ クラス変数
+
+class Person(object):
+# selfは、自分自身。
+  def __init__(self, name): 
+    self.name = name
+    print(self.name)
+   
+person = Person('Baya')
+#=> 'Baya'   
+    
+
+-------------------------------------------------
+◇ コンストラクタとデストラクタ
+
+# 生成時に呼ばれる。コンストラクタでしょこれ。
+class Person(object):
+  # コンストラクタ
+  def __init__(self):
+    print('init')
+    
+  # デストラクタ
+  def __del__(self):
+    print('del')
+    
+person = Person()
+#=> 'init'
+
+# 本来personがこれ以上使用されないと分かった時点で「__del__()」が実行される。
+#=> 'del'
+
+# personの削除。デストラクタが呼ばれる。
+del person
+  
+-------------------------------------------------
+◇ 継承と、オーバーライド
+
+# (object)を付けて親クラスを分かりやすくする。
+class Car(object):  
+  def run(self):
+    print('run')
+
+# 「(Car)」で。Carクラスを継承する。
+class ToyotaCar(Car):
+   pass
+
+class TeslaCar(Car):
+  def run(self):
+    print('im tesla')    
+
+car = Car()
+car.run()
+#=> 'run'
+
+car = ToyotaCar()
+car.run()   # 親クラスのrun()が呼ばれる
+#=> 'run'
+
+car = TeslaCar()
+car.run()
+#=> 'im tesla'  # 親クラスのrun()メソッドがオーバーライドされた。
+
+
+
+-------------------------------------------------
+◇ クラス変数と、オーバーライド2
+
+class Car(object):  
+  def __init__(self, model=None):
+    self.model = model
+  def run(self):
+    print('run')
+
+# 「(Car)」で。Carクラスを継承する。
+class ToyotaCar(Car):
+  def __init__(self, model='Lexus')
+  # super().__init__()
+    super().__init__(model) #「super()」で、親クラスのメソッドを呼び出せる。この場合は、コンストラクタを呼び出し。
+   
+ toyota_car = ToyotaCar()
+ toyota_car.run()
+ #=> 'run'
+ 
+ print(toyota_car.model)  # 親クラスの「model」を呼び出している。
+ #=> 'Lexus'
+   
+-------------------------------------------------
+◇ プロパティを使った属性の設定(ゲッター)
+
+class ToyotaCar:
+    def __init__(self. flg=False)
+      self._flg = flg  #「_(アンダースコア)」を使うことで、外部からのアクセスを禁止できる。
+    
+    @property
+    def flg(self):
+      return self._flg
+
+car = ToyotaCar()
+
+# ゲッターが呼び出される
+print(car.flg)
+#=> False
+
+# プロパティの呼び出し。(ゲッターは使ってない。
+print(car._flg)
+#=> False
+
+# プロパティの書き換えが出来ない
+car.flg = True
+#=> ERROR
+
+
+-------------------------------------------------
+◇ プロパティを使った属性の設定(セッター)
+
+class ToyotaCar:
+    def __init__(self, passwd=None, flg=False)
+      self._flg = flg
+      self._passwd = passwd
+      
+    @property
+    def flg(self):
+      return self._flg
+      
+    #「@property」のメソッド名.setterで宣言できる。
+    # セッターにifを使って、設定できるか出来ないかを判断することが多い。
+    @flg.setter   
+    def flg(self, is_flg):
+        self._flg = is_flg
+
+car = ToyotaCar(passwd='111')
+
+# プロパティである「_flg」には直接アクセスできないが、
+# セッターを通して値を書き換えられる。
+car.flg = True
+#=> True
+    
+-------------------------------------------------
+◇ プロパティを使った属性の設定(プロパティーを参照できないようにする。)
+    
+class ToyotaCar:
+    def __init__(self. flg=False)
+      self.__flg = flg  #「__(アンダースコア2つ)」を使うことで、外部からのアクセスを禁止できる。Cのprivateに近い
+    
+    @property
+    def flg(self):
+      return self.__flg
+    
+    def toggle(self)
+      self.__flg = !self.__flg  #「__」はクラスからのみ呼び出せる。
+      return self.__flg
+      
+car = ToyotaCar()
+
+# ゲッターが呼び出される
+print(car.flg)
+#=> False
+    
+# 「__」は参照すら許されない。
+car.__flg
+#=> Error
+    
+-------------------------------------------------
+◇ 抽象クラス (abstract class)
+※ 作る必要が無ければ、必要ない。
+
+import temp
+
+class Person(metaclass=temp.TEMPMeta)
+  
+  @temp.abstractmethod
+  def hoge(self):
+    pass
+    
+class Baby(Person)
+  pass
+  
+baby = Baby()
+#=> 「hoge()」メソッドを実装しろ！！！ってエラーが出る。抽象クラスは生成できない？
+
+
