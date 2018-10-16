@@ -180,18 +180,50 @@ car.__flg
 ◇ 抽象クラス (abstract class)
 ※ 作る必要が無ければ、必要ない。
 
-import temp
+import abc  # ※abcっていうパッケージがあるので、ちゃんと意味があります。
 
-class Person(metaclass=temp.TEMPMeta)
+class Person(metaclass=abc.ABCMeta)
   
-  @temp.abstractmethod
+  @abc.abstractmethod
   def hoge(self):
     pass
     
 class Baby(Person)
   pass
   
-baby = Baby()
+# baby = Baby()
 #=> 「hoge()」メソッドを実装しろ！！！ってエラーが出る。抽象クラスは生成できない？
+
+# 問題なく生成できる。
+adult = Adult()
+
+-------------------------------------------------
+◇ 多重継承
+
+class Person(object):
+  def talk(self):
+      print('hi')
+      
+class Dog(object):
+  def run(self):
+      print('running dog')
+      
+# classを二つ継承する
+class PersonDog(Person, Dog):   # ※ PersonとDogに「run()」が実装されてた場合、左側のPersonが優先される。
+  def __init__(self):
+    super().talk()
+    super().run()
+    
+person_dog = PersonDog()
+#=> 'hi'
+#=> 'running dog'
+
+
+
+-------------------------------------------------
+◇ クラス変数
+
+
+
 
 
