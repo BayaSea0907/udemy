@@ -220,3 +220,51 @@ person_dog = PersonDog()
 
 -------------------------------------------------
 ◇ クラス変数
+
+class Person(object):
+  name = 'BayaSea' # ※ 配列を使う場合は、ポインタ周りで注意が必要。
+  
+  def who_are_you():
+    return self.name  # Rubyのselfと同じですね。
+    
+-------------------------------------------------
+◇ クラスメソッドと、インスタンスメソッド
+
+※ インスタンスメソッドの書き方  def name(self):
+※ クラスメソッドの書き方       @classmethod \n def name(cls):
+
+class Person(object):
+        name = 'BayaSea'  # クラス変数
+
+        # インスタンスメソッド
+        def who_are_you(self):
+                return self.name
+                
+        @classmethod
+        def class_method_test(cls):
+                return cls.name
+
+a = Person()
+b = Person
+
+print(a.who_are_you())   #=> BayaSea
+print(b.who_are_you())   #=> error
+
+print(a.name) #=> BayaSea
+print(b.name) #=> BayaSea
+
+print(a.class_method_test()) #=> BayaSea
+print(b.class_method_test()) #=> BayaSea
+
+
+-------------------------------------------------
+◇ 特殊メソッド
+※ 「__」系のやつ
+
+・「__init__(self, args)」
+・「__str__(self, args)」
+・「__len__(self, args)」
+・「__add__(self, args)」
+・「__eq__(self, args)」
+
+※ 1 == a2　→ 「__eq__」が呼ばれるようになる！ 
