@@ -53,13 +53,14 @@ with open('test.txt', 'w+') as f:
 
 import csv
 
+# 書き込み
 with open('test.csv', 'w') as csv_file:
         field_names = ['Name', 'Count']
 
         writer = csv.DictWriter(csv_file, fieldnames = field_names)
-        writer.writeheader()
+        writer.writeheader() #フィールドを書き込み
 
-        writer.writerow({'Name': 'A', 'Count': 1})
+        writer.writerow({'Name': 'A', 'Count': 1}) # フィールドに応じたデータを保存
         writer.writerow({'Name': 'Baya', 'Count': 2})
         writer.writerow({'Name': 'Sea', 'Count': 3})
 
@@ -69,6 +70,13 @@ with open('test.csv', 'w') as csv_file:
 #=> Baya, 1
 #=> Sea,  3
 
+# 読み込み
+with open('test.csv', 'r') as csv_file:
+  data = csv.DictReader(csv_file)
+  
+  for row in data:
+    print(row['Name'], row['Count'])
+    
 -------------------------------------------------
 ◇ ファイル操作
 
