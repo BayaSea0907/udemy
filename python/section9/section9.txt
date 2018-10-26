@@ -1,4 +1,11 @@
 ◇ 9. デモアプリケーションの作成
 
 -------------------------------------------------
-◇ 
+◇ 設計
+
+[files]
+・main.py              ... roboterからのメッセージを受け取る
+・roboter.py           ... mainから受けとった情報を処理
+・csv_controller.py    ... roboterがコントローラーを持っている。
+
+・restaurant_list.csv  ... 言わずもがな。
