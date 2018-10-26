@@ -34,7 +34,7 @@ Rubyの「nil」  →「None」(多分)
 
 if x < 0:    (「:」← が入る)
 	# success処理
-elsif: x == 0
+elif x == 0
 	# インデントずらす。
 else:
 	# ※ endがいらない。
